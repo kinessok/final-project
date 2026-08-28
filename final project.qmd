@@ -63,3 +63,17 @@ linear_model <- lm(mhi_2018 ~ me_2018 + fme_2018 + mme_2018, data = childcare_co
 
 tidy(linear_model)
 ```
+
+```{r}
+scatterplot <- ggplot(childcare_costs,
+			 aes(x = mme_2018, y = fme_2018)) +
+	geom_point(aes(colour = mhi_2018)) +
+	labs(
+		x = "Median Earnings for the Male Population 16 y/o < (2018 $)",
+		y = "Median Earnings for the Female Population 16 y/o < (2018 $)",
+		color = "Median Household Income (2018 $)",
+		title = "Median Incomes in 2018"
+	) +
+	theme_classic()
+scatterplot
+```
