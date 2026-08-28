@@ -1,5 +1,5 @@
 ---
-title: "Final Project"
+title: "Quarto Final Project"
 author: "Kinesso Kombate"
 format: html
 execute:
