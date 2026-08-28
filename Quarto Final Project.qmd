@@ -1,0 +1,24 @@
+---
+title: "Quarto Final Project"
+author: "Kinesso Kombate"
+format: html
+execute:
+  echo: true
+---
+
+```{r}
+#| label: loading
+#| message: false
+library(gtsummary)
+library(tidyverse)
+library(here)
+library(broom)
+library(ggplot2)
+```
+
+# DATA
+
+The dataset `childcare_costs` comes from the National Database of Childcare Prices (NDCP). It is the most comprehensive federal source of childcare prices at the county level. The database offers childcare price data by childcare provider type, age of children, and county characteristics. The data available is from 2008 to 2018.
+
+```{r}
+
