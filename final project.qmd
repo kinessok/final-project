@@ -19,8 +19,12 @@ library(ggplot2)
 
 The dataset `childcare_costs` comes from the National Database of Childcare Prices (NDCP). It is the most comprehensive federal source of childcare prices at the county level. The database offers childcare price data by childcare provider type, age of children, and county characteristics. The data available is from 2008 to 2018.
 
+# Table
+
+(@tbl-one) shows the data association by each characteristics
 ```{r}
-#| label: load-data
+#| label: tbl-one
+#| tbl-cap: Descriptive data
 childcare_costs <- read_csv(here::here("childcare_costs.csv"))
 table1 <- tbl_summary(
 	childcare_costs,
@@ -64,7 +68,15 @@ linear_model <- lm(mhi_2018 ~ me_2018 + fme_2018 + mme_2018, data = childcare_co
 tidy(linear_model)
 ```
 
+## Figure
+
+(@fig-scatter) shows a relationship between median earnings by gender in scatterform
+
 ```{r}
+#| label: fig-scatter
+#| fig-cap: "Median earnings by Gender"
+#| message: false
+
 scatterplot <- ggplot(childcare_costs,
 			 aes(x = mme_2018, y = fme_2018)) +
 	geom_point(aes(colour = mhi_2018)) +
