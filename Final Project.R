@@ -57,3 +57,6 @@ summarize_var <- function(data, variable) {
 }
 summarize_var(childcare_costs, mhi_2018)
 summarize_var(childcare_costs, unr_20to64)
+summarize_var(childcare_costs, fme_2018)
+
+
