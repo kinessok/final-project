@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="Final Project_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="Final Project_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Final Project_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Final Project_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="Final Project_files/libs/bootstrap/bootstrap-0adbd572c065a29a1326d3f372afa1d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -112,8 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="data" class="level1">
 <h1>DATA</h1>
@@ -125,33 +124,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>shows the data association by each characteristics</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>childcare_costs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"childcare_costs.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 34567 Columns: 61
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (61): county_fips_code, study_year, unr_16, funr_16, munr_16, unr_20to64...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    childcare_costs,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> study_year,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(unr_16,funr_16,unr_20to64,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                            funr_20to64,flfpr_20to64,flfpr_20to64_6to17,pr_f,one_race_b),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label=</span> <span class="fu">list</span>(unr_16 <span class="sc">~</span> <span class="st">"Unemployment rate of the population ages 16 y/o &lt;"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                            funr_16 <span class="sc">~</span> <span class="st">"Unemployment rate of the female population ages 16 y/o &lt;"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                            unr_20to64 <span class="sc">~</span> <span class="st">"Unemployment rate of the population ages 20 - 64 y/o"</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                            funr_20to64 <span class="sc">~</span> <span class="st">"Unemployment rate of the female population ages 20 - 64 y/o"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                            flfpr_20to64 <span class="sc">~</span> <span class="st">"Labor force participation rate of the female population ages 20 - 64 y/o"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                            flfpr_20to64_6to17 <span class="sc">~</span> <span class="st">"Labor force participation rate of the female population ages 20 - 64 y/o who have children between 6 - 17 y/o"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                            pr_f <span class="sc">~</span> <span class="st">"Poverty rate for families"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                            one_race_b <span class="sc">~</span> <span class="st">"Percent of population that identifies as being one race and being only Black or African American"</span>),</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">"Missing"</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>childcare_costs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"childcare_costs.csv"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    childcare_costs,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> study_year,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(unr_16,funr_16,unr_20to64,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                            funr_20to64,flfpr_20to64,flfpr_20to64_6to17,pr_f,one_race_b),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">label=</span> <span class="fu">list</span>(unr_16 <span class="sc">~</span> <span class="st">"Unemployment rate of the population ages 16 y/o &lt;"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                            funr_16 <span class="sc">~</span> <span class="st">"Unemployment rate of the female population ages 16 y/o &lt;"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                            unr_20to64 <span class="sc">~</span> <span class="st">"Unemployment rate of the population ages 20 - 64 y/o"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                            funr_20to64 <span class="sc">~</span> <span class="st">"Unemployment rate of the female population ages 20 - 64 y/o"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                            flfpr_20to64 <span class="sc">~</span> <span class="st">"Labor force participation rate of the female population ages 20 - 64 y/o"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                            flfpr_20to64_6to17 <span class="sc">~</span> <span class="st">"Labor force participation rate of the female population ages 20 - 64 y/o who have children between 6 - 17 y/o"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                            pr_f <span class="sc">~</span> <span class="st">"Poverty rate for families"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                            one_race_b <span class="sc">~</span> <span class="st">"Percent of population that identifies as being one race and being only Black or African American"</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">"Missing"</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>table1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-one" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -159,23 +149,23 @@ Table&nbsp;1: Descriptive data
 </figcaption>
 <div aria-describedby="tbl-one-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="phirwufxqj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#phirwufxqj table {
+<div id="oabezayilg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oabezayilg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#phirwufxqj thead, #phirwufxqj tbody, #phirwufxqj tfoot, #phirwufxqj tr, #phirwufxqj td, #phirwufxqj th {
+#oabezayilg thead, #oabezayilg tbody, #oabezayilg tfoot, #oabezayilg tr, #oabezayilg td, #oabezayilg th {
   border-style: none;
 }
 
-#phirwufxqj p {
+#oabezayilg p {
   margin: 0;
   padding: 0;
 }
 
-#phirwufxqj .gt_table {
+#oabezayilg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -201,12 +191,12 @@ Table&nbsp;1: Descriptive data
   border-left-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_caption {
+#oabezayilg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#phirwufxqj .gt_title {
+#oabezayilg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -218,7 +208,7 @@ Table&nbsp;1: Descriptive data
   border-bottom-width: 0;
 }
 
-#phirwufxqj .gt_subtitle {
+#oabezayilg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -230,7 +220,7 @@ Table&nbsp;1: Descriptive data
   border-top-width: 0;
 }
 
-#phirwufxqj .gt_heading {
+#oabezayilg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -242,13 +232,13 @@ Table&nbsp;1: Descriptive data
   border-right-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_bottom_border {
+#oabezayilg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_col_headings {
+#oabezayilg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -263,7 +253,7 @@ Table&nbsp;1: Descriptive data
   border-right-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_col_heading {
+#oabezayilg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -283,7 +273,7 @@ Table&nbsp;1: Descriptive data
   overflow-x: hidden;
 }
 
-#phirwufxqj .gt_column_spanner_outer {
+#oabezayilg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -295,15 +285,15 @@ Table&nbsp;1: Descriptive data
   padding-right: 4px;
 }
 
-#phirwufxqj .gt_column_spanner_outer:first-child {
+#oabezayilg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#phirwufxqj .gt_column_spanner_outer:last-child {
+#oabezayilg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#phirwufxqj .gt_column_spanner {
+#oabezayilg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -315,11 +305,11 @@ Table&nbsp;1: Descriptive data
   width: 100%;
 }
 
-#phirwufxqj .gt_spanner_row {
+#oabezayilg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#phirwufxqj .gt_group_heading {
+#oabezayilg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -345,7 +335,7 @@ Table&nbsp;1: Descriptive data
   text-align: left;
 }
 
-#phirwufxqj .gt_empty_group_heading {
+#oabezayilg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -360,15 +350,15 @@ Table&nbsp;1: Descriptive data
   vertical-align: middle;
 }
 
-#phirwufxqj .gt_from_md > :first-child {
+#oabezayilg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#phirwufxqj .gt_from_md > :last-child {
+#oabezayilg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#phirwufxqj .gt_row {
+#oabezayilg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -387,7 +377,7 @@ Table&nbsp;1: Descriptive data
   overflow-x: hidden;
 }
 
-#phirwufxqj .gt_stub {
+#oabezayilg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -400,7 +390,7 @@ Table&nbsp;1: Descriptive data
   padding-right: 5px;
 }
 
-#phirwufxqj .gt_stub_row_group {
+#oabezayilg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -414,15 +404,15 @@ Table&nbsp;1: Descriptive data
   vertical-align: top;
 }
 
-#phirwufxqj .gt_row_group_first td {
+#oabezayilg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#phirwufxqj .gt_row_group_first th {
+#oabezayilg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#phirwufxqj .gt_summary_row {
+#oabezayilg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -432,16 +422,16 @@ Table&nbsp;1: Descriptive data
   padding-right: 5px;
 }
 
-#phirwufxqj .gt_first_summary_row {
+#oabezayilg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_first_summary_row.thick {
+#oabezayilg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#phirwufxqj .gt_last_summary_row {
+#oabezayilg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -451,7 +441,7 @@ Table&nbsp;1: Descriptive data
   border-bottom-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_grand_summary_row {
+#oabezayilg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -461,7 +451,7 @@ Table&nbsp;1: Descriptive data
   padding-right: 5px;
 }
 
-#phirwufxqj .gt_first_grand_summary_row {
+#oabezayilg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -471,7 +461,7 @@ Table&nbsp;1: Descriptive data
   border-top-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_last_grand_summary_row_top {
+#oabezayilg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -481,11 +471,11 @@ Table&nbsp;1: Descriptive data
   border-bottom-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_striped {
+#oabezayilg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#phirwufxqj .gt_table_body {
+#oabezayilg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -494,7 +484,7 @@ Table&nbsp;1: Descriptive data
   border-bottom-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_footnotes {
+#oabezayilg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -508,7 +498,7 @@ Table&nbsp;1: Descriptive data
   border-right-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_footnote {
+#oabezayilg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -517,7 +507,7 @@ Table&nbsp;1: Descriptive data
   padding-right: 5px;
 }
 
-#phirwufxqj .gt_sourcenotes {
+#oabezayilg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -531,7 +521,7 @@ Table&nbsp;1: Descriptive data
   border-right-color: #D3D3D3;
 }
 
-#phirwufxqj .gt_sourcenote {
+#oabezayilg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -539,72 +529,72 @@ Table&nbsp;1: Descriptive data
   padding-right: 5px;
 }
 
-#phirwufxqj .gt_left {
+#oabezayilg .gt_left {
   text-align: left;
 }
 
-#phirwufxqj .gt_center {
+#oabezayilg .gt_center {
   text-align: center;
 }
 
-#phirwufxqj .gt_right {
+#oabezayilg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#phirwufxqj .gt_font_normal {
+#oabezayilg .gt_font_normal {
   font-weight: normal;
 }
 
-#phirwufxqj .gt_font_bold {
+#oabezayilg .gt_font_bold {
   font-weight: bold;
 }
 
-#phirwufxqj .gt_font_italic {
+#oabezayilg .gt_font_italic {
   font-style: italic;
 }
 
-#phirwufxqj .gt_super {
+#oabezayilg .gt_super {
   font-size: 65%;
 }
 
-#phirwufxqj .gt_footnote_marks {
+#oabezayilg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#phirwufxqj .gt_asterisk {
+#oabezayilg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#phirwufxqj .gt_indent_1 {
+#oabezayilg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#phirwufxqj .gt_indent_2 {
+#oabezayilg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#phirwufxqj .gt_indent_3 {
+#oabezayilg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#phirwufxqj .gt_indent_4 {
+#oabezayilg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#phirwufxqj .gt_indent_5 {
+#oabezayilg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#phirwufxqj .katex-display {
+#oabezayilg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#phirwufxqj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#oabezayilg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -778,6 +768,7 @@ N = 3,142<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </figure>
 </div>
 </div>
+<p>The median (IQR) for the unemployment rate of the population ages 20-64 years old in 2018 is 5.0 (3.6, 6.7)</p>
 </section>
 <section id="table-1" class="level1">
 <h1>Table</h1>
@@ -785,27 +776,15 @@ N = 3,142<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <li>shows the univariate association between each labor market predictor and median household income.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>uv_regression <span class="ot">&lt;-</span> <span class="fu">tbl_uvregression</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    childcare_costs,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> mhi_2018,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        unr_16,funr_16,unr_20to64,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        funr_20to64,flfpr_20to64,flfpr_20to64_6to17,pr_f,one_race_b),</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm)<span class="sc">|&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>()</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>uv_regression</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>linear_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mhi_2018 <span class="sc">~</span> me_2018 <span class="sc">+</span> fme_2018 <span class="sc">+</span> mme_2018, <span class="at">data =</span> childcare_costs)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(linear_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 5
-  term         estimate std.error statistic   p.value
-  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept) -6870.     206.         -33.4 1.03e-240
-2 me_2018         0.859    0.0382      22.5 2.15e-111
-3 fme_2018        0.451    0.0229      19.7 5.90e- 86
-4 mme_2018        0.596    0.0190      31.5 3.69e-214</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>uv_regression <span class="ot">&lt;-</span> <span class="fu">tbl_uvregression</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    childcare_costs,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> mhi_2018,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        unr_16,funr_16,unr_20to64,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        funr_20to64,flfpr_20to64,flfpr_20to64_6to17,pr_f,one_race_b),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm)<span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bold_labels</span>()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>uv_regression</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-uvreg" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-uvreg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -813,23 +792,23 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
 </figcaption>
 <div aria-describedby="tbl-uvreg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="jycncirbvc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jycncirbvc table {
+<div id="wcydgvnefv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wcydgvnefv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jycncirbvc thead, #jycncirbvc tbody, #jycncirbvc tfoot, #jycncirbvc tr, #jycncirbvc td, #jycncirbvc th {
+#wcydgvnefv thead, #wcydgvnefv tbody, #wcydgvnefv tfoot, #wcydgvnefv tr, #wcydgvnefv td, #wcydgvnefv th {
   border-style: none;
 }
 
-#jycncirbvc p {
+#wcydgvnefv p {
   margin: 0;
   padding: 0;
 }
 
-#jycncirbvc .gt_table {
+#wcydgvnefv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -855,12 +834,12 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-left-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_caption {
+#wcydgvnefv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jycncirbvc .gt_title {
+#wcydgvnefv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -872,7 +851,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-bottom-width: 0;
 }
 
-#jycncirbvc .gt_subtitle {
+#wcydgvnefv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -884,7 +863,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-top-width: 0;
 }
 
-#jycncirbvc .gt_heading {
+#wcydgvnefv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -896,13 +875,13 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-right-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_bottom_border {
+#wcydgvnefv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_col_headings {
+#wcydgvnefv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -917,7 +896,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-right-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_col_heading {
+#wcydgvnefv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -937,7 +916,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   overflow-x: hidden;
 }
 
-#jycncirbvc .gt_column_spanner_outer {
+#wcydgvnefv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -949,15 +928,15 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   padding-right: 4px;
 }
 
-#jycncirbvc .gt_column_spanner_outer:first-child {
+#wcydgvnefv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jycncirbvc .gt_column_spanner_outer:last-child {
+#wcydgvnefv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jycncirbvc .gt_column_spanner {
+#wcydgvnefv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -969,11 +948,11 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   width: 100%;
 }
 
-#jycncirbvc .gt_spanner_row {
+#wcydgvnefv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jycncirbvc .gt_group_heading {
+#wcydgvnefv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,7 +978,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   text-align: left;
 }
 
-#jycncirbvc .gt_empty_group_heading {
+#wcydgvnefv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1014,15 +993,15 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   vertical-align: middle;
 }
 
-#jycncirbvc .gt_from_md > :first-child {
+#wcydgvnefv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jycncirbvc .gt_from_md > :last-child {
+#wcydgvnefv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jycncirbvc .gt_row {
+#wcydgvnefv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,7 +1020,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   overflow-x: hidden;
 }
 
-#jycncirbvc .gt_stub {
+#wcydgvnefv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1054,7 +1033,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   padding-right: 5px;
 }
 
-#jycncirbvc .gt_stub_row_group {
+#wcydgvnefv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1068,15 +1047,15 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   vertical-align: top;
 }
 
-#jycncirbvc .gt_row_group_first td {
+#wcydgvnefv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jycncirbvc .gt_row_group_first th {
+#wcydgvnefv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jycncirbvc .gt_summary_row {
+#wcydgvnefv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1086,16 +1065,16 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   padding-right: 5px;
 }
 
-#jycncirbvc .gt_first_summary_row {
+#wcydgvnefv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_first_summary_row.thick {
+#wcydgvnefv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jycncirbvc .gt_last_summary_row {
+#wcydgvnefv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1084,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-bottom-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_grand_summary_row {
+#wcydgvnefv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1115,7 +1094,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   padding-right: 5px;
 }
 
-#jycncirbvc .gt_first_grand_summary_row {
+#wcydgvnefv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +1104,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-top-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_last_grand_summary_row_top {
+#wcydgvnefv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1135,11 +1114,11 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-bottom-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_striped {
+#wcydgvnefv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jycncirbvc .gt_table_body {
+#wcydgvnefv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1148,7 +1127,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-bottom-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_footnotes {
+#wcydgvnefv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1162,7 +1141,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-right-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_footnote {
+#wcydgvnefv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1171,7 +1150,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   padding-right: 5px;
 }
 
-#jycncirbvc .gt_sourcenotes {
+#wcydgvnefv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1185,7 +1164,7 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   border-right-color: #D3D3D3;
 }
 
-#jycncirbvc .gt_sourcenote {
+#wcydgvnefv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1193,72 +1172,72 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
   padding-right: 5px;
 }
 
-#jycncirbvc .gt_left {
+#wcydgvnefv .gt_left {
   text-align: left;
 }
 
-#jycncirbvc .gt_center {
+#wcydgvnefv .gt_center {
   text-align: center;
 }
 
-#jycncirbvc .gt_right {
+#wcydgvnefv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jycncirbvc .gt_font_normal {
+#wcydgvnefv .gt_font_normal {
   font-weight: normal;
 }
 
-#jycncirbvc .gt_font_bold {
+#wcydgvnefv .gt_font_bold {
   font-weight: bold;
 }
 
-#jycncirbvc .gt_font_italic {
+#wcydgvnefv .gt_font_italic {
   font-style: italic;
 }
 
-#jycncirbvc .gt_super {
+#wcydgvnefv .gt_super {
   font-size: 65%;
 }
 
-#jycncirbvc .gt_footnote_marks {
+#wcydgvnefv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jycncirbvc .gt_asterisk {
+#wcydgvnefv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jycncirbvc .gt_indent_1 {
+#wcydgvnefv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jycncirbvc .gt_indent_2 {
+#wcydgvnefv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jycncirbvc .gt_indent_3 {
+#wcydgvnefv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jycncirbvc .gt_indent_4 {
+#wcydgvnefv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jycncirbvc .gt_indent_5 {
+#wcydgvnefv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jycncirbvc .katex-display {
+#wcydgvnefv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jycncirbvc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wcydgvnefv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1344,24 +1323,25 @@ Table&nbsp;2: Univariate regressions predicting median household income (2018 do
 </figure>
 </div>
 </div>
-<p>The estimated association between female labor force participation (ages 20–64) and median household income was 898 (882, 913).</p>
-<section id="figure" class="level2">
-<h2 class="anchored" data-anchor-id="figure">Figure</h2>
+<p>The regression for the Unemployment rate of the population aged 16 years old or older is -1,429 (95% CI -1,466, -1,393; p&lt;0.001)</p>
+</section>
+<section id="figure" class="level1">
+<h1>Figure</h1>
 <ol start="3" class="example" type="1">
 <li>shows a relationship between median earnings by gender in scatterform</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>scatterplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(childcare_costs,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> mme_2018, <span class="at">y =</span> fme_2018)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> mhi_2018)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Median Earnings for the Male Population 16 y/o &lt; (2018 $)"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Median Earnings for the Female Population 16 y/o &lt; (2018 $)"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Median Household Income (2018 $)"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Median Incomes in 2018"</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>scatterplot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>scatterplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(childcare_costs,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> mme_2018, <span class="at">y =</span> fme_2018)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> mhi_2018)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Median Earnings for the Male Population 16 y/o &lt; (2018 $)"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Median Earnings for the Female Population 16 y/o &lt; (2018 $)"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Median Household Income (2018 $)"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Median Incomes in 2018"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>scatterplot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1375,7 +1355,39 @@ Figure&nbsp;1: Median earnings by Gender
 </div>
 </div>
 </div>
-</section>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot=</span> scatterplot, <span class="at">filename =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"project-image.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>summarize_var <span class="ot">&lt;-</span> <span class="cf">function</span>(data, variable) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>({{variable}})),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mean =</span> <span class="fu">mean</span>({{ variable }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_var</span>(childcare_costs, mhi_2018)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      n   mean
+  &lt;int&gt;  &lt;dbl&gt;
+1 34567 50447.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_var</span>(childcare_costs, unr_20to64)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      n  mean
+  &lt;int&gt; &lt;dbl&gt;
+1 34567  6.90</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize_var</span>(childcare_costs, fme_2018)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      n   mean
+  &lt;int&gt;  &lt;dbl&gt;
+1 34567 23475.</code></pre>
+</div>
+</div>
 </section>
 
 </main>

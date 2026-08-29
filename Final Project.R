@@ -1,8 +1,20 @@
 library(gtsummary)
 library(tidyverse)
+library(here)
+
+# DATA
+# The dataset `childcare_costs` comes from the National Database of Childcare
+# Prices (NDCP). It is the most comprehensive federal source of childcare prices
+# at the county level. The database offers childcare price data by childcare
+# provider type, age of children, and county characteristics. The data available
+# is from 2008 to 2018.
+
+# TABLE
+#(@tbl-one) shows the data association by each characteristics
+
 childcare_costs <- read_csv(here::here("childcare_costs.csv"))
 
-tbl_summary(
+table1 <- tbl_summary(
 	childcare_costs,
 	by = study_year,
 	include = c(unr_16,funr_16,unr_20to64,
@@ -18,23 +30,30 @@ tbl_summary(
 	missing_text = "Missing"
 	)
 
-tbl_uvregression(
+table1
+
+uv_regression <- tbl_uvregression(
 	childcare_costs,
 	y = mhi_2018,
 	include = c(
 		unr_16,funr_16,unr_20to64,
 		funr_20to64,flfpr_20to64,flfpr_20to64_6to17,pr_f,one_race_b),
-	method = lm)
-linear_model <- lm(mhi_2018 ~ me_2018 + fme_2018 + mme_2018,
-									 data = childcare_costs)
-library(broom)
-tidy(linear_model)
+	method = lm)|>
+	bold_labels()
+
+uv_regression
+
+# The regression for the Unemployment rate of the population aged 16 years old
+# or older is `r inline_text(uv_regression, variable = unr_16)`
+
 
 #Scatterplot Figure
+# Figure
+#(@fig-scatter) shows a relationship between median earnings by gender in scatterform
 
 library(ggplot2)
 
-ggplot(childcare_costs,
+scatterplot <- ggplot(childcare_costs,
 			 aes(x = mme_2018, y = fme_2018)) +
 	geom_point(aes(colour = mhi_2018)) +
 	labs(
@@ -45,15 +64,18 @@ ggplot(childcare_costs,
 	) +
 	theme_classic()
 
+scatterplot
+
+#SAVING IMAGE
+
+ggsave(plot= scatterplot, filename = here::here("project-image.png"))
+
 summarize_var <- function(data, variable) {
 	data |>
 	summarize(
 						n = sum(!is.na({{variable}})),
 						mean = mean({{ variable }}, na.rm = TRUE),
-						sd = sd({{variable}}, na.rm = TRUE),
-						min = min({{variable}}, na.rm = TRUE),
-						max = max({{variable}}, na.rm = TRUE)
-						)
+					 )
 }
 summarize_var(childcare_costs, mhi_2018)
 summarize_var(childcare_costs, unr_20to64)

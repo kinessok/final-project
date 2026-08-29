@@ -1,7 +1,9 @@
 ---
-title: "Quarto Final Project"
+title: "Final Project"
 author: "Kinesso Kombate"
-format: html
+format:
+  html:
+    theme: lux
 execute:
   echo: true
 ---
@@ -11,7 +13,6 @@ execute:
 library(gtsummary)
 library(tidyverse)
 library(here)
-library(broom)
 library(ggplot2)
 ```
 
@@ -25,6 +26,7 @@ The dataset `childcare_costs` comes from the National Database of Childcare Pric
 ```{r}
 #| label: tbl-one
 #| tbl-cap: Descriptive data
+#| message: false
 childcare_costs <- read_csv(here::here("childcare_costs.csv"))
 table1 <- tbl_summary(
 	childcare_costs,
@@ -45,6 +47,7 @@ table1 <- tbl_summary(
 table1
 ```
 
+The median (IQR)  for the unemployment rate of the population ages 20-64 years old in 2018  is `r inline_text(table1, variable = unr_20to64, column = "2018")`
 
 # Table
 
@@ -64,12 +67,11 @@ uv_regression <- tbl_uvregression(
   bold_labels()
 uv_regression
 
-linear_model <- lm(mhi_2018 ~ me_2018 + fme_2018 + mme_2018, data = childcare_costs)
-
-tidy(linear_model)
 ```
 
-## Figure
+The regression for the Unemployment rate of the population aged 16 years old or older is `r inline_text(uv_regression, variable = unr_16)`
+
+# Figure
 
 (@fig-scatter) shows a relationship between median earnings by gender in scatterform
 
@@ -92,6 +94,12 @@ scatterplot
 ```
 
 ```{r}
+#| message: false
+ggsave(plot= scatterplot, filename = here::here("project-image.png"))
+```
+
+```{r}
+#| message: false
 summarize_var <- function(data, variable) {
 	data |>
 	summarize(
@@ -103,4 +111,3 @@ summarize_var(childcare_costs, mhi_2018)
 summarize_var(childcare_costs, unr_20to64)
 summarize_var(childcare_costs, fme_2018)
 ```
-
