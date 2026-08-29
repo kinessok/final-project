@@ -45,6 +45,7 @@ table1 <- tbl_summary(
 table1
 ```
 
+
 # Table
 
 (@tbl-uvreg) shows the univariate association between each labor market predictor and median household income.
@@ -89,3 +90,17 @@ scatterplot <- ggplot(childcare_costs,
 	theme_classic()
 scatterplot
 ```
+
+```{r}
+summarize_var <- function(data, variable) {
+	data |>
+	summarize(
+						n = sum(!is.na({{variable}})),
+						mean = mean({{ variable }}, na.rm = TRUE),
+						)
+}
+summarize_var(childcare_costs, mhi_2018)
+summarize_var(childcare_costs, unr_20to64)
+summarize_var(childcare_costs, fme_2018)
+```
+
