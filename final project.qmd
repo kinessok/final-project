@@ -22,7 +22,7 @@ The dataset `childcare_costs` comes from the National Database of Childcare Pric
 
 # Table
 
-(@tbl-one) shows the data association by each characteristics
+@tbl-one shows the data association by each characteristics
 ```{r}
 #| label: tbl-one
 #| tbl-cap: Descriptive data
@@ -51,7 +51,7 @@ The median (IQR)  for the unemployment rate of the population ages 20-64 years o
 
 # Table
 
-(@tbl-uvreg) shows the univariate association between each labor market predictor and median household income.
+@tbl-uvreg shows the univariate association between each labor market predictor and median household income.
 
 ```{r}
 #| label: tbl-uvreg
@@ -73,7 +73,7 @@ The regression for the Unemployment rate of the population aged 16 years old or 
 
 # Figure
 
-(@fig-scatter) shows a relationship between median earnings by gender in scatterform
+@fig-scatter shows a relationship between median earnings by gender in scatterform
 
 ```{r}
 #| label: fig-scatter
